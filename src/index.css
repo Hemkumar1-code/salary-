@@ -1,38 +1,37 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  --primary: #4f46e5;
-  /* Indigo 600 */
-  --primary-hover: #4338ca;
-  /* Indigo 700 */
-  --secondary: #64748b;
-  /* Slate 500 */
-  --background: #f8fafc;
+  --primary: #6366f1;
+  /* Indigo 500 */
+  --primary-hover: #818cf8;
+  /* Indigo 400 */
+  --secondary: #94a3b8;
+  /* Slate 400 */
+  --background: #000000;
+  /* Black */
+  --surface: #111827;
+  /* Gray 900 */
+  --text-main: #f8fafc;
   /* Slate 50 */
-  --surface: #ffffff;
-  --text-main: #0f172a;
-  /* Slate 900 */
-  --text-secondary: #475569;
-  /* Slate 600 */
-  --border: #cee4e7;
-  /* Slate 200 */
+  --text-secondary: #cbd5e1;
+  /* Slate 300 */
+  --border: #334155;
+  /* Slate 700 */
   --success: #10b981;
   /* Emerald 500 */
-  --success-hover: #059669;
-  /* Emerald 600 */
+  --success-hover: #34d399;
+  /* Emerald 400 */
   --error: #ef4444;
   /* Red 500 */
   --radius: 12px;
-  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(0 0 0 / 0.3);
+  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -4px rgb(0 0 0 / 0.3);
 }
 
 body {
   font-family: 'Outfit', sans-serif;
   background-color: var(--background);
-  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
-  /* Deep Indigo to Dark Purple */
   color: var(--text-main);
   margin: 0;
   -webkit-font-smoothing: antialiased;
@@ -49,8 +48,9 @@ body::before {
   left: 0;
   right: 0;
   height: 400px;
-  background: radial-gradient(circle at 50% 0%, #e0e7ff 0%, transparent 70%);
+  background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, transparent 70%);
   z-index: -1;
+  opacity: 0.5;
 }
 
 * {
@@ -88,34 +88,33 @@ button {
   -webkit-text-fill-color: transparent;
   margin: 0 0 0.5rem 0;
   letter-spacing: -0.025em;
-  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
 .app-subtitle {
-  color: #c7d2fe;
-  /* Light Indigo */
+  color: var(--text-secondary);
   font-size: 1.125rem;
   max-width: 600px;
 }
 
 /* Cards */
-/* Glassmorphism Card */
+/* Glassmorphism Card (Dark) */
 .card {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(17, 24, 39, 0.7);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-radius: var(--radius);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
   padding: 2.5rem;
   margin-bottom: 2rem;
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.03);
-  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .card-header {
@@ -141,7 +140,7 @@ button {
   padding: 4rem 2rem;
   text-align: center;
   transition: all 0.2s ease;
-  background: #f8fafc;
+  background: rgba(255, 255, 255, 0.02);
   cursor: pointer;
   position: relative;
   display: flex;
@@ -153,8 +152,7 @@ button {
 .upload-area:hover,
 .upload-area.drag-active {
   border-color: var(--primary);
-  background: #eef2ff;
-  /* Very light indigo */
+  background: rgba(99, 102, 241, 0.1);
   transform: scale(1.01);
 }
 
@@ -201,7 +199,7 @@ button {
 .btn:hover {
   transform: translateY(-2px) scale(1.02);
   /* Popup Animation */
-  box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.3);
+  box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.4);
 }
 
 .btn:active {
@@ -212,27 +210,27 @@ button {
   background: linear-gradient(135deg, var(--primary) 0%, #4338ca 100%);
   color: white;
   box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, #4338ca 0%, #3730a3 100%);
+  background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%);
 }
 
-/* ... existing disabled styles ... */
 .btn-primary:disabled {
-  background: #cbd5e1;
-  color: #64748b;
+  background: #334155;
+  color: #94a3b8;
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
+  border-color: transparent;
 }
 
 .btn-success {
   background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
   color: white;
   box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .btn-success:hover {
@@ -253,6 +251,7 @@ button {
   border-radius: var(--radius);
   border: 1px solid var(--border);
   box-shadow: var(--shadow-sm);
+  background: var(--surface);
 }
 
 table {
@@ -262,7 +261,7 @@ table {
 }
 
 th {
-  background-color: #f1f5f9;
+  background-color: #1e293b;
   padding: 1rem 1.5rem;
   font-weight: 600;
   color: var(--text-secondary);
@@ -285,7 +284,7 @@ tr:last-child td {
 }
 
 tr:hover td {
-  background-color: #f8fafc;
+  background-color: #1f2937;
 }
 
 /* Stats Dashboard */
@@ -297,7 +296,7 @@ tr:hover td {
 }
 
 .stat-card {
-  background: white;
+  background: var(--surface);
   padding: 1.5rem;
   border-radius: var(--radius);
   border: 1px solid var(--border);
@@ -311,10 +310,11 @@ tr:hover td {
 .stat-card:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow);
+  border-color: var(--primary);
 }
 
 .stat-icon-wrapper {
-  background: #eef2ff;
+  background: rgba(99, 102, 241, 0.1);
   padding: 0.75rem;
   border-radius: 50%;
   color: var(--primary);
@@ -343,9 +343,9 @@ tr:hover td {
 
 /* Error Message */
 .error-msg {
-  background-color: #fef2f2;
-  border: 1px solid #fee2e2;
-  color: var(--error);
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
   padding: 1rem;
   border-radius: var(--radius);
   margin-bottom: 1.5rem;
