@@ -585,37 +585,7 @@ function App() {
         </div>
       )}
 
-      {processedData && stats && (
-        <div className="stats-grid animate-fade-in">
-          <div className="stat-card">
-            <div className="stat-icon-wrapper">
-              <Users size={24} />
-            </div>
-            <div className="stat-content">
-              <span className="stat-value">{stats.totalEmployees}</span>
-              <span className="stat-label">Total Employees</span>
-            </div>
-          </div>
-          <div className="stat-card">
-            <div className="stat-icon-wrapper">
-              <Clock size={24} />
-            </div>
-            <div className="stat-content">
-              <span className="stat-value">{stats.totalHours}</span>
-              <span className="stat-label">Total Worked Hours</span>
-            </div>
-          </div>
-          <div className="stat-card">
-            <div className="stat-icon-wrapper" style={{ background: '#ecfdf5', color: '#10b981' }}>
-              <CheckCircle size={24} />
-            </div>
-            <div className="stat-content">
-              <span className="stat-value">Ready</span>
-              <span className="stat-label">Status</span>
-            </div>
-          </div>
-        </div>
-      )}
+
 
       {processedData && (
         <div className="animate-fade-in">
@@ -690,7 +660,7 @@ function App() {
         </div>
       )}
 
-      <footer style={{ textAlign: 'center', marginTop: '4rem', color: 'var(--text-secondary)', fontSize: '0.875rem', opacity: 0.8 }}>
+      <footer style={{ textAlign: 'center', marginTop: '4rem', color: '#94a3b8', fontSize: '0.875rem', opacity: 0.8 }}>
         <p>© {new Date().getFullYear()} Attendance Pro System</p>
       </footer>
     </div>
