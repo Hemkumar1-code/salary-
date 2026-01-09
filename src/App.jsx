@@ -521,9 +521,16 @@ function App() {
 
   return (
     <div className="container animate-fade-in">
-      <div className="header">
-        <h1>Attendance Processor Pro</h1>
-        <p>Strict Multi-Sheet Parser with Output Styling</p>
+      <div className="app-header">
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.5rem' }}>
+          <Clock size={40} color="var(--primary)" />
+          <h1 className="app-title">Attendance Pro</h1>
+        </div>
+        <p className="app-subtitle">
+          Professional Attendance Parsing & Reporting Tool.
+          <br />
+          Supports multi-sheet processing with strict validation.
+        </p>
       </div>
 
       <div className="card">
@@ -539,9 +546,11 @@ function App() {
             }
           }}
         >
-          <FileUp className="upload-icon" style={{ margin: '0 auto' }} />
-          <h3>{file ? file.name : "Click or Drag & Drop Excel File Here"}</h3>
-          <p style={{ color: 'var(--text-secondary)', marginTop: '0.5rem' }}>Supports .xlsx, .xls</p>
+          <FileUp size={64} className="upload-icon" />
+          <h3 className="upload-text">{file ? file.name : "Upload Attendance File"}</h3>
+          <p className="upload-subtext">
+            {file ? "Click to change file" : "Drag & drop or click to browse (.xlsx, .xls)"}
+          </p>
           <input
             id="fileInput"
             type="file"
@@ -556,11 +565,13 @@ function App() {
             className="btn btn-primary"
             onClick={processFile}
             disabled={!file || isProcessing}
-            style={{ minWidth: '200px' }}
+            style={{ minWidth: '240px', fontSize: '1.1rem' }}
           >
-            {isProcessing ? "Processing..." : (
+            {isProcessing ? (
+              "Processing..."
+            ) : (
               <>
-                <FileSpreadsheet size={20} /> Process & Generate
+                <FileSpreadsheet size={22} /> Process & Generate
               </>
             )}
           </button>
@@ -570,27 +581,35 @@ function App() {
       {error && (
         <div className="error-msg animate-fade-in">
           <AlertCircle size={24} />
-          <span>{error}</span>
+          <span style={{ fontWeight: 500 }}>{error}</span>
         </div>
       )}
 
       {processedData && (
         <div className="animate-fade-in">
           <div className="card">
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-              <h2 style={{ margin: 0, fontSize: '1.5rem' }}>Preview</h2>
-              <button className="btn btn-primary" onClick={handleDownload} style={{ backgroundColor: 'var(--success)' }}>
-                <Download size={20} /> Download Report
-              </button>
-              <button className="btn btn-primary" onClick={handleSummaryDownload} style={{ backgroundColor: '#007bff', marginLeft: '1rem' }}>
-                <FileSpreadsheet size={20} /> Download Excel
-              </button>
+            <div className="card-header">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <Users size={24} color="var(--primary)" />
+                <h2 className="card-title">Data Preview</h2>
+              </div>
+
+              <div className="btn-actions">
+                <button className="btn btn-primary" onClick={handleDownload} style={{ marginRight: '0.5rem' }}>
+                  <Download size={18} /> Download Detailed Report
+                </button>
+                <button className="btn btn-success" onClick={handleSummaryDownload}>
+                  <FileSpreadsheet size={18} /> Download Summary Excel
+                </button>
+              </div>
             </div>
 
-            <p style={{ marginBottom: '1rem', color: 'var(--text-secondary)' }}>
-              <CheckCircle size={16} style={{ display: 'inline', marginRight: '4px' }} />
-              Previewing first 5 rows (Showing Yellow BG for missing OutTime):
-            </p>
+            <div style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', background: '#eff6ff', padding: '1rem', borderRadius: '8px', color: '#1e40af' }}>
+              <Info size={18} />
+              <span className="text-sm font-medium">
+                Previewing first 5 rows (Yellow background indicates missing OutTime)
+              </span>
+            </div>
 
             <div className="table-container">
               <table>
@@ -598,8 +617,8 @@ function App() {
                   <tr>
                     <th>Emp Name</th>
                     <th>Date</th>
-                    <th>In</th>
-                    <th>Out</th>
+                    <th>In Time</th>
+                    <th>Out Time</th>
                     <th>Status</th>
                     <th>Total Hours</th>
                   </tr>
@@ -607,17 +626,30 @@ function App() {
                 <tbody>
                   {processedData.length > 0 && processedData[0].records.length > 0 ? (
                     processedData[0].records.slice(0, 5).map((r, idx) => (
-                      <tr key={idx} style={{ backgroundColor: (r.inTime && !r.outTime) ? '#fffde7' : 'transparent' }}>
-                        <td>{r.empName}</td>
+                      <tr key={idx} style={{ backgroundColor: (r.inTime && !r.outTime) ? '#fef3c7' : undefined }}>
+                        <td className="font-medium">{r.empName}</td>
                         <td>{r.date}</td>
-                        <td>{r.inTime}</td>
-                        <td style={{ color: (r.inTime && !r.outTime) ? 'red' : 'inherit' }}>{r.outTime || (r.inTime ? "MISSING" : "")}</td>
-                        <td>{r.status}</td>
-                        <td>{r.totalWorkingHours}</td>
+                        <td>{r.inTime || "-"}</td>
+                        <td style={{ color: (r.inTime && !r.outTime) ? '#b45309' : 'inherit', fontWeight: (r.inTime && !r.outTime) ? 600 : 400 }}>
+                          {r.outTime || (r.inTime ? "MISSING" : "-")}
+                        </td>
+                        <td>
+                          <span style={{
+                            padding: '0.25rem 0.75rem',
+                            borderRadius: '999px',
+                            fontSize: '0.75rem',
+                            fontWeight: 600,
+                            backgroundColor: r.status.includes('PRESENT') ? '#dcfce7' : '#fee2e2',
+                            color: r.status.includes('PRESENT') ? '#166534' : '#991b1b'
+                          }}>
+                            {r.status}
+                          </span>
+                        </td>
+                        <td>{r.totalWorkingHours ? `${r.totalWorkingHours} hrs` : "-"}</td>
                       </tr>
                     ))
                   ) : (
-                    <tr><td colSpan="6" style={{ textAlign: 'center' }}>No records found for first valid employee.</td></tr>
+                    <tr><td colSpan="6" style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-secondary)' }}>No records found.</td></tr>
                   )}
                 </tbody>
               </table>
